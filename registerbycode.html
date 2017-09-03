@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>用户登记</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+</head>
+<body>
+<div class="page-group">
+  <div class="page page-current">
+    <header class="bar bar-nav">
+      <h1 class="title">用户登记</h1>
+    </header>
+    <div class="content">
+      <div class="card">
+        <div class="card-header">登录结果</div>
+        <div class="card-content">
+          <div class="card-content-inner" id="inner" style="text-align: center">请稍等..。。。.</div>
+        </div>
+        <div class="card-footer">点击跳转到流量追杀令<a href="/">流量追杀令</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="//g.alicdn.com/sj/lib/zepto/zepto.min.js"></script>
+<script>$.config = {router: false}</script>
+<script src="//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js"></script>
+<script>
+	var code = GetParameter("code");
+	if(code!==null){
+		$.post("http://api.fengkmm.me:8080/migu_fengkmm_me/code",{code:code},function(json){
+			var json = JSON.parse(json);
+			var data = new Date();
+			if(json.status==200){
+				$.ajax({
+					url:"http://www.cmpassport.com/openapi/webacquireapi?clientid=300007880362&msgid="+data.getTime(),
+					dataType:"jsonp",
+					success:function(data){
+						$.post("http://api.fengkmm.me:8080/migu_fengkmm_me/registerbycode",{data:data,code:code},function(data){
+							json = JSON.parse(data);
+							$("#inner").text(json.msg);
+						});
+					}
+				});
+			}else if(json.status==220){
+				$("#inner").text("该Code已经被登记，请联系群主");
+			}else{
+				$("#inner").text("Code不存在，请联系群主");
+			}
+		});
+	}else{
+		$("#inner").text("Code为空，请联系群主");
+	}
+	function GetParameter(name){
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)
+			return  unescape(r[2]);
+		return null;
+	}
+	</script>
+	</body>
+</html>

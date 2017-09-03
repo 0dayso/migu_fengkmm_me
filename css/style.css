@@ -1,0 +1,29 @@
+*{padding: 0;margin: 0;}
+/*body{background-image: url(../img/bg.jpg);background-size: cover;background-size: 100% 100%;}*/
+body{background-color: rgba(21,19,19,0.20);}
+h1{text-align: center;font-size: 25px;padding: 20px 20px 0 20px;color: dodgerblue;}
+h2{text-align: center;padding: 40px;}
+.form{width: 90%;margin: 30px auto;font-size: 25px;}
+.form .check{text-align: center;}
+.form .check span{font-size: 20px;background-color: rgba(255,255,255,0.60);width: 50px;border-radius: 5px;padding: 3px; margin-left: 10px; cursor: pointer;}
+.form .mess{text-align: center;color: green;font-size: 22px;}
+.form .flow{text-align: center;}
+.form .flow .input-flow{display: inline-block;width: 64px;font-weight: bold;padding: 3px 6px;}
+.form .submit{height: 40px;outline: none;background-color: buttonface;}
+.outside{width: 90%;margin: 30px auto;height: 80px;}
+.outside a{color: black;line-height: 30px;font-size: 15px;text-align: center;}
+.outside .task{width: 49%;display: inline-block;background-color: buttonface;padding: 5px 8px;}
+.outside .migu{width: 49%;display: inline-block;background-color: buttonface;padding: 10px 8px;text-align: center;}
+.outside .migu-Residual{font-size: 25px;font-weight: bold;text-align: center;padding-top: 20px;}
+.patent{padding-top:60px;text-align:center;}
+.help{text-align: center;padding-top: 10px;font-size: 25px;font-weight: bolder;}
+.help a:hover{text-decoration: none;color: red;}
+.help a:visited{text-decoration: none;color: red;}
+.help button{width:80%;outline:none;}
+.header{font-size: 35px;padding-top: 40px;}
+.list{width: 80%;font-size: 25px;margin: 10px auto;}
+.list p{margin: 15px 0;text-align:center;}
+.list .note{font-size: 25px;margin: 40px;text-align: center;}
+.warning{margin-top: 40px;margin-bottom: 20px;}
+.warning p{text-align:center;font-size: 30px;font-weight: bold;}
+.jion_group{display: inline-block;text-decoration: none;border: 2px solid rgba(144,135,135,1.00);font-size: 30px;padding: 20px 40px;}

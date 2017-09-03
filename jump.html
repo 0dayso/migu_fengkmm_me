@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Detecting</title>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1 style="color: green;">One moment please......</h1>
+<script>
+	var date = new Date();
+			$.ajax({
+				url:"http://www.cmpassport.com/openapi/webacquireapi?clientid=300007880362&msgid="+date.getTime(),
+				dataType:"jsonp",
+				success:function(json){
+					$.post("http://api.fengkmm.me:8080/migu_fengkmm_me/check",{data:json},function(json){
+						json = JSON.parse(json);
+						if(json.status=="200"){
+							//用户已被授权
+							window.location.href = "/index.html?code="+json.code+"&status=Authorized&msig="+date.getTime();
+						}else if(json.status=="201"){
+							//用户未被授权
+							window.location.href = "/index.html?code=&status=Unauthorized&msig="+date.getTime();
+						}else if(json.status=="203"){
+							//请使用移动数据
+							window.location.href = "/index.html?code=&status=NoMonet&msig="+date.getTime();
+						}else{
+							console.log(json);
+						}
+					});
+				}
+			});
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="keywords" content="流量,追杀令,流量追杀令，江西流量追杀令" />
+<title>流量追杀令</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>仅限江西，用来刷移动流量追杀令任务</h1>
+  <form class="form" method="post" action="web/go.php">
+    <div class="form-group">
+      <p class="check">检测地址是否可用<span id="jc">检测</span></p>
+      <input type="hidden" id="m" name="m">
+    </div>
+    <div class="form-group">
+      <p class="mess">检测结果:请点击检测</p>
+    </div>
+    <div class="form-group">
+      <p class="flow">输入要刷的流量
+        <input type="text" class="form-control input-flow" id="flow" name="flow" value="10" placeholder="1024">
+        M</p>
+    </div>
+    <div class="form-group">
+      <input type="submit" class="form-control submit" value="开始">
+    </div>
+  </form>
+  <div class="outside"> <a href="http://wap.jx.10086.cn/hui/daliang/receiveResult">
+    <p class="task">领取追杀令任务</p>
+    </a>
+    <p class="migu">查询咪咕流量余额</p>
+    <p class="migu-Residual">咪咕剩余流量:<span id="miguText">点击查询</span></p>
+  </div>
+  <div class="help">
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">帮助文档</button>
+    </div>
+  <div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"></button>
+          <h4 class="modal-title" id="myModalLabel" style="outline=none;">帮助文档</h4>
+        </div>
+        <div class="modal-body">
+          <p><b>警告：</b></p>
+          <p>只能刷10G,不能用WIFI，用你要刷追杀令的那张手机卡的数据刷，<b>10G之内不会扣套餐流量,10G之内不会扣套餐流量,10G之内不会扣套餐流量,10G之内不会扣套餐流量</b></p>
+          <p><b>注意:</b></p>
+          <p>如果你的流量任务是2G，5G,10G那么恭喜你，你直接在本网站刷完领取流量即可，推荐第一次先刷10M，然后去查流量，如果没扣套餐流量，那就继续刷，有时候会扣一点流量，那是其他软件扣的，比如QQ，浏览器流量其他网页等。</p>
+          <p><b>步骤:</b></p>
+          <p>1:点击领取流量追杀令任务，领取任务。</p>
+          <p>2:在输入流量框内输入要刷的流量。</p>
+          <p>3:点击开始即可。</p>
+          <p><b>提示:</b></p>
+          <p>10G的最后一个1G最好100M的刷，防止超过赠送的流量导致扣费。</p>
+          <p>计算公式：已刷流量=总已使用流量-(套餐内总流量-剩余流量)</p>
+          <p>有什么不懂得加群交流<b><a href="https://shang.qq.com/wpa/qunwpa?idkey=67d26a204cb44273c3e1b7a9fcc1bb856575d2b4f6b83aadb50f1fe5bdd14b74">点击加群</a></b></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="patent">
+    <p>Copyright@  fengkmm(忆) </p>
+  </div>
+</div>
+<script src="js/jquery-3.2.1.js"></script> 
+<script src="js/bootstrap.js"></script>
+<script src="js/js.js"></script>
+<script>
+	var code = getQueryString("code");
+	var status = getQueryString("status");
+	var timestamp = getQueryString("msig");
+	var date = new Date();
+	if(date.getTime()-timestamp>60000){
+		window.location.href="/";
+	}
+	if(status=="Authorized"){
+		$.post("http://api.fengkmm.me:8080/migu_fengkmm_me/code",{code:code},function(data){
+		data = JSON.parse(data);
+		if(data.status=="200"){
+			console.log("用户已被授权");
+		}else{
+			var result = confirm("你不是群成员，一次只能刷100M，如果想自由刷，请加群并联系群主，加群请点击确定，只刷100M请点击取消");
+			if(result){
+				window.location.href="https://shang.qq.com/wpa/qunwpa?idkey=67d26a204cb44273c3e1b7a9fcc1bb856575d2b4f6b83aadb50f1fe5bdd14b74";
+			}else{
+				$("#flow").attr("readonly","readonly");
+				$("#flow").val("100");
+			}
+		}
+	});
+	}else if(status=="Unauthorized"){
+		var result = confirm("你不是群成员，一次只能刷100M，如果想自由刷，请加群并联系群主，加群请点击确定，只刷100M请点击取消");
+		if(result){
+			window.location.href="https://shang.qq.com/wpa/qunwpa?idkey=67d26a204cb44273c3e1b7a9fcc1bb856575d2b4f6b83aadb50f1fe5bdd14b74";
+		}else{
+			$("#flow").attr("readonly","readonly");
+			$("#flow").val("100");
+		}
+	}else if(status=="NoMonet"){
+		alert("请使用移动网络后再次进入该网站");
+		window.location.href = "/backweb.html";
+	}else{
+		window.location.href="/";
+	}
+	function getQueryString(name) {
+		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) {
+			return unescape(r[2]);
+  	}
+		return null;
+	}
+</script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan style='display:none'; id='cnzz_stat_icon_1262167114'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1262167114%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>
